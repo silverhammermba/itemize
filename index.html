@@ -10,12 +10,12 @@
 		<h2>Instructions</h2>
 		<div id='instructions'>
 			<p>
-				Divide up grocery lists like a boss. Enter prices line by line
+				Divide up grocery lists like a boss. Enter the price of each item
 				either as dollars with a decimal point or as cents without
 			</p>
 			<p class="example">
 				<span class="entry">100</span> and <span class="entry">1.00</span>
-				both enter <span class="price">$1.00</span>
+				both enter <span class="price">1.00</span>
 			</p>
 			<p>
 				Multiply with <span class="entry">@</span> or <span class="entry">*</span>
@@ -25,13 +25,13 @@
 			</p>
 			<p>
 				Precede a series of prices with a string of letters to denote
-				ownership. Case matters, order doesn't!
+				ownership. Case and order don't matter!
 			</p>
 			<p class="example">
-				Enter <span class="entry">MT</span> to indicate that all following
+				<span class="entry">MT</span> indicates that all following
 				prices are split between M and T. 
 			</p>
-			<p>
+			<p> matters,
 				Enter <span class="entry">!</span> to remove items from the current
 				owners in reverse order (alternatively enter negative items).
 			</p>
@@ -40,23 +40,31 @@
 		<div id="status">
 			<p>Start with the first owner string</p>
 		</div>
-		<input type='text'>
+		<input type='text' class='entry'>
 		<button type='button'>Add</button>
 		<div>
 			<ul class="price_list">
-				<li class="price">$5.00</li>
-				<li class="price">$3.03</li>
-				<li class="price">$1000.00</li>
-				<li class="price">$750.70</li>
-				<li class="price">$5.00</li>
-				<li class="price">$3.03</li>
-				<li class="price">$1000.00</li>
-				<li class="price">$750.70</li>
+				<li class="price">5.00</li>
+				<li class="price">3.03</li>
+				<li class="price">1000.00</li>
+				<li class="price">750.70</li>
+				<li class="price">5.00</li>
+				<li class="price">3.03</li>
+				<li class="price">1000.00</li>
+				<li class="price">750.70</li>
+				<li class="price">5.00</li>
+				<li class="price">3.03</li>
+				<li class="price">1000.00</li>
+				<li class="price">750.70</li>
+				<li class="price">5.00</li>
+				<li class="price">3.03</li>
+				<li class="price">1000.00</li>
+				<li class="price">750.70</li>
 			</ul>
 			<ul class="price_list">
-				<li class="price">$5.00</li>
-				<li class="price">$3.03</li>
-				<li class="price">$1000.00</li>
+				<li class="price">5.00</li>
+				<li class="price">3.03</li>
+				<li class="price">1000.00</li>
 			</ul>
 			<div class="price_list" id='add'><p>+</p></div>
 		</div>
