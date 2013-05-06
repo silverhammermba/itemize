@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Itemizer</title>
+		<script type='text/javascript' src='jquery-2.0.0.js'></script>
+		<script type='text/javascript' src='script.js'></script>
+		<link type='text/css' rel='stylesheet' href='stylesheet.css'/>
+	</head>
+	<body>
+		<h2>Instructions</h2>
+		<div id='instructions'>
+			<p>
+				Divide up grocery lists like a boss. Enter prices line by line
+				either as dollars with a decimal point or as cents without
+			</p>
+			<p class="example">
+				<span class="entry">100</span> and <span class="entry">1.00</span>
+				both enter <span class="price">$1.00</span>
+			</p>
+			<p>
+				Multiply with <span class="entry">@</span> or <span class="entry">*</span>
+			</p>
+			<p class="example">
+				<span class="entry">4@3.00</span>, <span class="entry">4*300</span>, <span class="entry">2 @ -1.30</span>, etc.
+			</p>
+			<p>
+				Precede a series of prices with a string of letters to denote
+				ownership. Case matters, order doesn't!
+			</p>
+			<p class="example">
+				Enter <span class="entry">MT</span> to indicate that all following
+				prices are split between M and T. 
+			</p>
+			<p>
+				Enter <span class="entry">!</span> to remove items from the current
+				owners in reverse order (alternatively enter negative items).
+			</p>
+			<p>Enter <span class="entry">$</span> to see a summary of data entered so far.</p>
+		</div>
+		<div id="status">
+			<p>Start with the first owner string</p>
+		</div>
+		<input type='text'>
+		<button type='button'>Add</button>
+		<div>
+			<ul class="price_list">
+				<li class="price">$5.00</li>
+				<li class="price">$3.03</li>
+				<li class="price">$1000.00</li>
+				<li class="price">$750.70</li>
+				<li class="price">$5.00</li>
+				<li class="price">$3.03</li>
+				<li class="price">$1000.00</li>
+				<li class="price">$750.70</li>
+			</ul>
+			<ul class="price_list">
+				<li class="price">$5.00</li>
+				<li class="price">$3.03</li>
+				<li class="price">$1000.00</li>
+			</ul>
+			<div class="price_list" id='add'><p>+</p></div>
+		</div>
+	</body>
+</html>

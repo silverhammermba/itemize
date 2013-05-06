@@ -1,0 +1,31 @@
+.entry {
+	font-family: monospace;
+	background-color: #DDDDDD;
+}
+
+.price_list {
+	width: 200px;
+	min-height: 200px;
+	background-color: #AABBDD;
+	margin: 5px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#add {
+	height: 100%;
+	text-align: center;
+	font-size: 60px;
+	font-weight: bold;
+	background-color: #DDDDDD;
+	border: 2px dashed black;
+	opacity: 0.5;
+}
+
+#add.active {
+	opacity: 1.00;
+}
+
+#add p {
+	top: 50%;
+}
