@@ -26,10 +26,10 @@ $(document).ready(function()
 	}).click(function()
 	{
 		var new_list = $('<ul class="price_list current"><label for="buyers">Paid for by</label></ul>');
-		$(this).before(new_list);
-
 		var buyers = $("<input type='text' id='buyers'>");
 		new_list.append(buyers);
+
+		$(this).before(new_list);
 		buyers.focus();
 	});
 });
@@ -47,4 +47,10 @@ $(document).on('blur', '#buyers', function()
 		$('#status p').text("That is not a valid buyer string.");
 		$('ul.current').remove();
 	}
+});
+
+$(document).on('click', 'ul.price_list', function()
+{
+	$('.current').removeClass('current');
+	$(this).addClass('current');
 });

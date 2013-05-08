@@ -17,6 +17,10 @@
 	vertical-align: top;
 }
 
+.price_list.current {
+	background-color: #EEEEAA;
+}
+
 #add {
 	text-align: center;
 	font-size: 60px;
