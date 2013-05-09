@@ -40,11 +40,11 @@ $(document).ready(function()
 		$(this).removeClass('active');
 	}).click(function()
 	{
-		$('ul.current').removeClass('current');
+		$('.current').removeClass('current');
 
-		var new_list = $('<ul class="price_list current"><label for="buyers">Paid for by</label></ul>');
+		var new_list = $('<div class="price_list current"><label for="buyers">Paid for by</label><ul></ul></div>');
 		var buyers = $("<input type='text' id='buyers'>");
-		new_list.append(buyers);
+		new_list.children('ul').before(buyers);
 
 		$(this).before(new_list);
 		buyers.focus();
@@ -55,10 +55,14 @@ $(document).on('blur', '#buyers', function()
 {
 	$(this).remove();
 
-	if ($('ul.current .buyers').length === 0)
+	if ($('.current .buyers').length === 0)
 	{
-		$('ul.current').remove();
-		$('ul.price_list').last().addClass('current');
+		$('.current').remove();
+
+		// TODO made hacky, yo
+		var price_lists = $('.price_list');
+		if (price_lists.length > 1)
+			price_lists[price_lists.length - 2].addClass('current');
 	}
 }).on('keydown', '#buyers', function(event)
 {
@@ -78,8 +82,9 @@ $(document).on('blur', '#buyers', function()
 	}
 });
 
-$(document).on('click', 'ul.price_list', function()
+$(document).on('click', '.price_list', function()
 {
+	if (this.id === 'add') return;
 	$('.current').removeClass('current');
 	$(this).addClass('current');
 });
