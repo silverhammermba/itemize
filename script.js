@@ -1,6 +1,9 @@
+// TODO calling $(this)[0] seems really clumsy
+
 // return array of buyers from string, or false if invalid
 var str_to_buyers = function(str)
 {
+	// TODO be permissive of whitespace
 	str = str.toUpperCase();
 
 	// must be all letters
@@ -15,8 +18,25 @@ var str_to_buyers = function(str)
 	return str.split().sort();
 };
 
+var enter_price = function(string)
+{
+	$('.current').append($('<li class="price">' + string + '</li>'));
+	$('#input').val('');
+};
+
 $(document).ready(function()
 {
+	$('#input').keyup(function(event)
+	{
+		if (event.which === 13)
+			enter_price($(this)[0].value);
+	});
+
+	$('#enter_price').click(function(event)
+	{
+		enter_price($('#input')[0].value);
+	});
+
 	$('#add').hover(function()
 	{
 		$(this).addClass('active');
