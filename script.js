@@ -18,23 +18,18 @@ var str_to_buyers = function(str)
 	return str.split().sort();
 };
 
-var enter_price = function(string)
-{
-	$('.current').append($('<li class="price">' + string + '</li>'));
-	$('#input').val('');
-};
-
 $(document).ready(function()
 {
-	$('#input').keyup(function(event)
+	$('#input').keydown(function(event)
 	{
 		if (event.which === 13)
-			enter_price($(this)[0].value);
+			$('#enter_price').click();
 	});
 
-	$('#enter_price').click(function(event)
+	$('#enter_price').click(function()
 	{
-		enter_price($('#input')[0].value);
+		$('.current').append($('<li class="price">' + $('#input').val() + '</li>'));
+		$('#input').val('');
 	});
 
 	$('#add').hover(function()
@@ -45,6 +40,8 @@ $(document).ready(function()
 		$(this).removeClass('active');
 	}).click(function()
 	{
+		$('ul.current').removeClass('current');
+
 		var new_list = $('<ul class="price_list current"><label for="buyers">Paid for by</label></ul>');
 		var buyers = $("<input type='text' id='buyers'>");
 		new_list.append(buyers);
@@ -56,16 +53,28 @@ $(document).ready(function()
 
 $(document).on('blur', '#buyers', function()
 {
-	var buyers = str_to_buyers($(this)[0].value);
+	$(this).remove();
+
+	if ($('ul.current .buyers').length === 0)
+	{
+		$('ul.current').remove();
+		$('ul.price_list').last().addClass('current');
+	}
+}).on('keydown', '#buyers', function(event)
+{
+	if (event.which !== 13) return;
+
+	var buyers = str_to_buyers($(this).val());
 
 	if (buyers)
 	{
-		$(this).replaceWith('<div class="buyers">' + buyers + '</div>');
+		$(this).after('<span class="buyers"> ' + buyers + '</span>');
+		$(this).blur();
 	}
 	else
 	{
+		// TODO more helpful error
 		$('#status p').text("That is not a valid buyer string.");
-		$('ul.current').remove();
 	}
 });
 
