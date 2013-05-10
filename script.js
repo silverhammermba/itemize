@@ -1,4 +1,5 @@
 // TODO calling $(this)[0] seems really clumsy
+// TODO warn when leaving page
 
 // return array of buyers from string, or false if invalid
 var str_to_buyers = function(str)
@@ -42,7 +43,7 @@ $(document).ready(function()
 	{
 		$('.current').removeClass('current');
 
-		var new_list = $('<div class="price_block prices current"><label for="buyers">Paid for by</label><ul></ul></div>');
+		var new_list = $('<div class="price_block prices current"><span class="close">&#x2715;</span><label for="buyers">Paid for by</label><ul></ul></div>');
 		var buyers = $("<input type='text' id='buyers'>");
 		new_list.children('ul').before(buyers);
 
@@ -75,6 +76,20 @@ $(document).on('blur', '#buyers', function()
 	{
 		// TODO more helpful error
 		$('#status p').text("That is not a valid buyer string.");
+	}
+});
+
+$(document).on('click', '.close', function(event)
+{
+	var current = $(this).parent().hasClass('current');
+
+	$(this).parent().remove();
+	event.stopPropagation();
+
+	if (current)
+	{
+		// TODO maybe a smarter way to set this
+		$('.prices').last().addClass('current');
 	}
 });
 

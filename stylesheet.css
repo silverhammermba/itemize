@@ -8,6 +8,11 @@
 	left: 20px;
 }
 
+.close {
+	float: right;
+	cursor: pointer;
+}
+
 .price_block {
 	width: 200px;
 	min-height: 200px;
@@ -15,7 +20,6 @@
 	margin: 5px;
 	display: inline-block;
 	vertical-align: top;
-	cursor: pointer;
 }
 
 .current {
@@ -28,6 +32,7 @@
 	font-weight: bold;
 	border: 2px dashed black;
 	opacity: 0.25;
+	cursor: pointer;
 }
 
 #add.active {
