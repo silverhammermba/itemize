@@ -42,7 +42,7 @@ $(document).ready(function()
 	{
 		$('.current').removeClass('current');
 
-		var new_list = $('<div class="price_list current"><label for="buyers">Paid for by</label><ul></ul></div>');
+		var new_list = $('<div class="price_block prices current"><label for="buyers">Paid for by</label><ul></ul></div>');
 		var buyers = $("<input type='text' id='buyers'>");
 		new_list.children('ul').before(buyers);
 
@@ -58,11 +58,7 @@ $(document).on('blur', '#buyers', function()
 	if ($('.current .buyers').length === 0)
 	{
 		$('.current').remove();
-
-		// TODO made hacky, yo
-		var price_lists = $('.price_list');
-		if (price_lists.length > 1)
-			price_lists[price_lists.length - 2].addClass('current');
+		$('.prices').last().addClass('current');
 	}
 }).on('keydown', '#buyers', function(event)
 {
@@ -82,9 +78,8 @@ $(document).on('blur', '#buyers', function()
 	}
 });
 
-$(document).on('click', '.price_list', function()
+$(document).on('click', '.prices', function()
 {
-	if (this.id === 'add') return;
 	$('.current').removeClass('current');
 	$(this).addClass('current');
 });

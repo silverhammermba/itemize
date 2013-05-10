@@ -8,16 +8,17 @@
 	left: 20px;
 }
 
-.price_list {
+.price_block {
 	width: 200px;
 	min-height: 200px;
 	background-color: #AABBDD;
 	margin: 5px;
 	display: inline-block;
 	vertical-align: top;
+	cursor: pointer;
 }
 
-.price_list.current {
+.current {
 	background-color: #EEEEAA;
 }
 
