@@ -29,15 +29,40 @@ var check_input = function(str)
 		$('#input').val('');
 		return false;
 	}
-	else if (str.match(/^((\d+)\s*[@*]\s*)?(-?\d+)(\.\d{2})?$/))
-	{
-		// TODO normalize
-		return str;
-	}
 	else
 	{
-		$('#status p').text('You must enter a buyer string or a price.');
-		return false;
+		var match = str.match(/^((\d+)\s*[@*]\s*)?(-?\d+)(\.(\d{0,2}))?$/);
+
+		if (match)
+		{
+			// TODO negatives don't work
+			// normalize
+			var cents = match[3];
+
+			if (match[5] !== undefined)
+			{
+				for (var i = match[5].length; i < 2; i++)
+					match[5] += '0'
+				cents = cents * 100 + parseInt(match[5], 10);
+			}
+
+			if (match[2])
+				cents = cents * match[2];
+
+			var display = cents.toString();
+
+			for (var i = display.length; i < 3; i++)
+				display = '0' + display;
+
+			display = display.substring(0, display.length - 2) + '.' + display.substring(display.length - 2);
+
+			return [display, cents];
+		}
+		else
+		{
+			$('#status p').text('You must enter a buyer string or a price.');
+			return false;
+		}
 	}
 };
 
@@ -58,7 +83,7 @@ $(document).ready(function()
 			// TODO error message when bought for isn't set
 			if ($('.current').length > 0)
 			{
-				$('.current').append($('<li class="price">' + price + '</li>'));
+				$('.current').append($('<li class="price">' + price[0] + '</li>'));
 				$('#input').val('');
 			}
 			else
