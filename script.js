@@ -1,4 +1,3 @@
-// TODO calling $(this)[0] seems really clumsy
 // TODO warn when leaving page
 
 // return array of buyers from string, or false if invalid
@@ -19,6 +18,29 @@ var str_to_buyers = function(str)
 	return str.split().sort();
 };
 
+// TODO separate the responsibility here
+var check_input = function(str)
+{
+	var bought_for = str_to_buyers(str);
+
+	if (bought_for)
+	{
+		$('#bought_for').text('For ' + bought_for);
+		$('#input').val('');
+		return false;
+	}
+	else if (str.match(/^((\d+)\s*[@*]\s*)?(-?\d+)(\.\d{2})?$/))
+	{
+		// TODO normalize
+		return str;
+	}
+	else
+	{
+		$('#status p').text('You must enter a buyer string or a price.');
+		return false;
+	}
+};
+
 $(document).ready(function()
 {
 	$('#input').keydown(function(event)
@@ -29,8 +51,21 @@ $(document).ready(function()
 
 	$('#enter_price').click(function()
 	{
-		$('.current').append($('<li class="price">' + $('#input').val() + '</li>'));
-		$('#input').val('');
+		var price = check_input($('#input').val());
+
+		if (price)
+		{
+			// TODO error message when bought for isn't set
+			if ($('.current').length > 0)
+			{
+				$('.current').append($('<li class="price">' + price + '</li>'));
+				$('#input').val('');
+			}
+			else
+			{
+				$('#status p').text('You need to create a price list to add prices.');
+			}
+		}
 	});
 
 	$('#add').hover(function()
