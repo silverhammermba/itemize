@@ -49,6 +49,6 @@ li {
 	margin-left: 0;
 }
 
-.price:before {
-	content: "$";
+.cents {
+	display: none;
 }

@@ -46,15 +46,25 @@ var check_input = function(str)
 				cents = cents * 100 + parseInt(match[5], 10);
 			}
 
-			if (match[2])
-				cents = cents * match[2];
-
 			var display = cents.toString();
+			var prefix = '';
+
+			if (cents < 0)
+			{
+				prefix = '-';
+				display = display.substring(1);
+			}
 
 			for (var i = display.length; i < 3; i++)
 				display = '0' + display;
 
-			display = display.substring(0, display.length - 2) + '.' + display.substring(display.length - 2);
+			display = prefix + '$' + display.substring(0, display.length - 2) + '.' + display.substring(display.length - 2);
+
+			if (match[2])
+			{
+				cents = cents * match[2];
+				display = match[2] + ' @ ' + display;
+			}
 
 			return [display, cents];
 		}
@@ -83,7 +93,7 @@ $(document).ready(function()
 			// TODO error message when bought for isn't set
 			if ($('.current').length > 0)
 			{
-				$('.current').append($('<li class="price">' + price[0] + '</li>'));
+				$('.current').append($('<li class="price">' + price[0] + '<span class="cents">' + price[1] + '</span></li>'));
 				$('#input').val('');
 			}
 			else
