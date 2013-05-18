@@ -31,11 +31,16 @@ var check_input = function(str)
 	}
 	else
 	{
+		if ($('#bought_for').text().substring(0, 4) !== "For ")
+		{
+			$('#status p').text('Who was this purchased for?');
+			return false;
+		}
+
 		var match = str.match(/^((\d+)\s*[@*]\s*)?(-?\d+)(\.(\d{0,2}))?$/);
 
 		if (match)
 		{
-			// TODO negatives don't work
 			// normalize
 			var cents = match[3];
 
