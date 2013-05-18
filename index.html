@@ -2,14 +2,14 @@
 <html>
 	<head>
 		<title>Itemizer</title>
-		<script type='text/javascript' src='jquery-2.0.0.js'></script>
-		<script type='text/javascript' src='script.js'></script>
-		<link type='text/css' rel='stylesheet' href='stylesheet.css'/>
+		<script type="text/javascript" src="jquery-2.0.0.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
 	</head>
 	<body>
 		<h2>Instructions</h2>
 		<!-- TODO these instructions blow -->
-		<div id='instructions'>
+		<div id="instructions">
 			<p>
 				Divide up grocery lists like a boss. Enter the price of each item
 				either as dollars with a decimal point or as cents without
@@ -43,12 +43,15 @@
 			<p>Start with the first owner string</p>
 		</div>
 
-		<label id="bought_for" for="input">Who was this bought for?</label>
-		<input type='text' id="input" class='entry'>
-		<button id='enter_price' type='button'>Add</button>
+		<form>
+			<label id="bought_for" for="input">Who was this bought for?</label>
+			<input type="text" id="input" class="entry">
+			<button id="enter_price" type="button">Add</button>
 
-		<div>
-			<div class="price_block" id='add'><p>+</p></div>
-		</div>
+			<div>
+				<div class="price_block" id="add"><p>+</p></div>
+			</div>
+			<button type="button">Total</button>
+		</form>
 	</body>
 </html>
