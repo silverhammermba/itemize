@@ -23,6 +23,7 @@ var check_input = function(str)
 {
 	var bought_for = str_to_buyers(str);
 
+	// if they entered a buyer string, set that
 	if (bought_for)
 	{
 		$('#bought_for').text('For ' + bought_for);
@@ -31,6 +32,7 @@ var check_input = function(str)
 	}
 	else
 	{
+		// if the buyer string hasn't been set yet, error
 		if ($('#bought_for').text().substring(0, 4) !== "For ")
 		{
 			$('#status p').text('Who was this purchased for?');
@@ -39,6 +41,7 @@ var check_input = function(str)
 
 		var match = str.match(/^((\d+)\s*[@*]\s*)?(-?\d+)(\.(\d{0,2}))?$/);
 
+		// if they entered a price
 		if (match)
 		{
 			// normalize
@@ -83,19 +86,21 @@ var check_input = function(str)
 
 $(document).ready(function()
 {
+	// pressing enter in input clicks the add button
 	$('#input').keydown(function(event)
 	{
 		if (event.which === 13)
 			$('#enter_price').click();
 	});
 
+	// clicking the add button
 	$('#enter_price').click(function()
 	{
 		var price = check_input($('#input').val());
 
+		// if there were no errors parsing input
 		if (price)
 		{
-			// TODO error message when bought for isn't set
 			if ($('.current').length > 0)
 			{
 				$('.current').append($('<li class="price">' + price[0] + '<span class="cents">' + price[1] + '</span></li>'));
@@ -108,6 +113,7 @@ $(document).ready(function()
 		}
 	});
 
+	// button for adding new lists
 	$('#add').hover(function()
 	{
 		$(this).addClass('active');
@@ -116,6 +122,7 @@ $(document).ready(function()
 		$(this).removeClass('active');
 	}).click(function()
 	{
+		// add a new price list
 		$('.current').removeClass('current');
 
 		var new_list = $('<div class="price_block prices current"><span class="close">&#x2715;</span><label for="buyers">Paid for by</label><ul></ul></div>');
@@ -127,6 +134,9 @@ $(document).ready(function()
 	});
 });
 
+// hooks for elements created after page ready
+
+// remove price list if buyers aren't set
 $(document).on('blur', '#buyers', function()
 {
 	$(this).remove();
@@ -136,10 +146,12 @@ $(document).on('blur', '#buyers', function()
 		$('.current').remove();
 		$('.prices').last().addClass('current');
 	}
+// create buyers for price list
 }).on('keydown', '#buyers', function(event)
 {
 	if (event.which !== 13) return;
 
+	// TODO check for price lists with same buyers
 	var buyers = str_to_buyers($(this).val());
 
 	if (buyers)
@@ -154,6 +166,7 @@ $(document).on('blur', '#buyers', function()
 	}
 });
 
+// delete price list
 $(document).on('click', '.close', function(event)
 {
 	var current = $(this).parent().hasClass('current');
@@ -168,6 +181,7 @@ $(document).on('click', '.close', function(event)
 	}
 });
 
+// switch current price list
 $(document).on('click', '.prices', function()
 {
 	$('.current').removeClass('current');

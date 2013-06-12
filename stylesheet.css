@@ -22,6 +22,7 @@
 	vertical-align: top;
 }
 
+/* TODO use border instead or something */
 .current {
 	background-color: #EEEEAA;
 }
