@@ -101,9 +101,9 @@ $(document).ready(function()
 		// if there were no errors parsing input
 		if (price)
 		{
-			if ($('.current').length > 0)
+			if ($('.current_list').length > 0)
 			{
-				$('.current').append($('<li class="price">' + price[0] + '<span class="cents">' + price[1] + '</span> <span class="for">' + $('#bought_for').text() + '</span></li>'));
+				$('.current_list').append($('<li class="price">' + price[0] + '<span class="cents">' + price[1] + '</span> <span class="for">' + $('#bought_for').text() + '</span></li>'));
 				$('#input').val('');
 			}
 			else
@@ -123,9 +123,9 @@ $(document).ready(function()
 	}).click(function()
 	{
 		// add a new price list
-		$('.current').removeClass('current');
+		$('.current_list').removeClass('current_list');
 
-		var new_list = $('<div class="price_block prices current"><span class="close">&#x2715;</span><label for="buyers">Paid for by</label><ul></ul></div>');
+		var new_list = $('<div class="price_block prices current_list"><span class="close">&#x2715;</span><label for="buyers">Paid for by</label><ul></ul></div>');
 		var buyers = $("<input type='text' id='buyers'>");
 		new_list.children('ul').before(buyers);
 
@@ -141,10 +141,10 @@ $(document).on('blur', '#buyers', function()
 {
 	$(this).remove();
 
-	if ($('.current .buyers').length === 0)
+	if ($('.current_list .buyers').length === 0)
 	{
-		$('.current').remove();
-		$('.prices').last().addClass('current');
+		$('.current_list').remove();
+		$('.prices').last().addClass('current_list');
 	}
 // create buyers for price list
 }).on('keydown', '#buyers', function(event)
@@ -169,21 +169,33 @@ $(document).on('blur', '#buyers', function()
 // delete price list
 $(document).on('click', '.close', function(event)
 {
-	var current = $(this).parent().hasClass('current');
+	var current_list = $(this).parent().hasClass('current_list');
 
 	$(this).parent().remove();
 	event.stopPropagation();
 
-	if (current)
+	if (current_list)
 	{
 		// TODO maybe a smarter way to set this
-		$('.prices').last().addClass('current');
+		$('.prices').last().addClass('current_list');
 	}
 });
 
 // switch current price list
 $(document).on('click', '.prices', function()
 {
-	$('.current').removeClass('current');
-	$(this).addClass('current');
+	$('.current_list').removeClass('current_list');
+	$(this).addClass('current_list');
+});
+
+$(document).on('mouseenter', '.price', function()
+{
+	$('.current_price').removeClass('current_price');
+	$(this).addClass('current_price');
+}).on('mouseleave', '.price', function()
+{
+	$(this).removeClass('current_price');
+}).on('click', '.price', function()
+{
+	$(this).remove();
 });
