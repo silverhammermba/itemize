@@ -103,7 +103,7 @@ $(document).ready(function()
 		{
 			if ($('.current_list').length > 0)
 			{
-				$('.current_list').append($('<li class="price">' + price[0] + '<span class="cents">' + price[1] + '</span> <span class="for">' + $('#bought_for').text() + '</span></li>'));
+				$('.current_list ul').append($('<li class="price">' + price[0] + '<span class="cents">' + price[1] + '</span> <span class="for">' + $('#bought_for').text() + '</span></li>'));
 				$('#input').val('');
 			}
 			else
