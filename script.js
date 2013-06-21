@@ -198,4 +198,6 @@ $(document).on('mouseenter', '.price', function()
 }).on('click', '.price', function()
 {
 	$(this).remove();
+
+	return false;
 });
