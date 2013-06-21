@@ -26,14 +26,14 @@ var check_input = function(str)
 	// if they entered a buyer string, set that
 	if (bought_for)
 	{
-		$('#bought_for').text('For ' + bought_for);
+		$('#input_desc').text('For ').append($('<span id="bought_for">' + bought_for + '</span>'));
 		$('#input').val('');
 		return false;
 	}
 	else
 	{
 		// if the buyer string hasn't been set yet, error
-		if ($('#bought_for').text().substring(0, 4) !== "For ")
+		if ($('#bought_for').length === 0)
 		{
 			$('#status p').text('Who was this purchased for?');
 			return false;
@@ -103,7 +103,7 @@ $(document).ready(function()
 		{
 			if ($('.current').length > 0)
 			{
-				$('.current').append($('<li class="price">' + price[0] + '<span class="cents">' + price[1] + '</span></li>'));
+				$('.current').append($('<li class="price">' + price[0] + '<span class="cents">' + price[1] + '</span> <span class="for">' + $('#bought_for').text() + '</span></li>'));
 				$('#input').val('');
 			}
 			else
