@@ -23,8 +23,18 @@
 }
 
 /* TODO use border instead or something */
-.current {
-	background-color: #EEEEAA;
+.current_list {
+	background-color: #AAAAFF;
+	border: 1px dotted black;
+}
+
+.current_price {
+	color: white;
+	font-weight: bold;
+	background-color: #A70D0D;
+}
+
+.current_price {
 }
 
 #add {
