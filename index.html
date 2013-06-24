@@ -12,12 +12,30 @@
 		<!-- TODO these instructions blow -->
 		<div id="instructions">
 			<p>
-				Divide up grocery lists like a boss. Enter the price of each item
-				either as dollars with a decimal point or as cents without
+			Divide up grocery lists like a boss. First click, the big + to
+			create a new shopping list. Type some letters to describe who paid
+			for this list.
 			</p>
 			<p class="example">
-				<span class="entry">100</span> and <span class="entry">1.00</span>
-				both enter <span class="price">1.00</span>
+			If the whole list was paid for by Jebediah, you might enter <span class="entry">J</span>.
+			If the cost of the list was split between Jebediah and Roland, you might enter <span class="entry">JR</span>.
+			</p>
+			<p>
+			The order of the letters doesn't matter, nor does upper- vs. lower-case.
+			</p>
+			<p>
+			Next enter who the first item was bought for, using a similar
+			string of letters.
+			</p>
+			<p class="example">
+			If Hank and Linda are splitting a <span class="price">$5.49</span>
+			gallon of milk, you would first enter <span class="entry">HL</span>.
+			</p>
+			Next you can start entering prices.
+			<p class="example">
+			Enter dollars with a decimal point or cents without.
+			<span class="entry">100</span>, <span class="entry">1.00</span>,
+			and <span class="entry">1.</span> all enter <span class="price">$1.00</span>.
 			</p>
 			<p>
 				Multiply with <span class="entry">@</span> or <span class="entry">*</span>
@@ -26,18 +44,10 @@
 				<span class="entry">4@3.00</span>, <span class="entry">4*300</span>, <span class="entry">2 @ -1.30</span>, etc.
 			</p>
 			<p>
-				Precede a series of prices with a string of letters to denote
-				ownership. Case and order don't matter!
+			Click an entry in a shopping list to remove it. Click shopping
+			lists to switch which list the next price is added to. Click
+			"Total" to see the results of all current lists.
 			</p>
-			<p class="example">
-				<span class="entry">MT</span> indicates that all following
-				prices are split between M and T. 
-			</p>
-			<p>
-				Enter <span class="entry">!</span> to remove items from the current
-				owners in reverse order (alternatively enter negative items).
-			</p>
-			<p>Enter <span class="entry">$</span> to see a summary of data entered so far.</p>
 		</div>
 
 		<div id="status">

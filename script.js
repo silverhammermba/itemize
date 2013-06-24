@@ -46,6 +46,7 @@ var check_input = function(str)
 			return false;
 		}
 
+		// TODO multiplication doesn't work for negatives...
 		var match = str.match(/^((\d+)\s*[@*]\s*)?(-?\d+)(\.(\d{0,2}))?$/);
 
 		// if they entered a price
