@@ -1,6 +1,11 @@
 // TODO warn when leaving page
 
-google.load("visualization", "1", {packages:["corechart"]});
+google.load("visualization", "1", { packages:["corechart"] });
+
+var round_cents = function(cents)
+{
+	return Math.round(cents) / 100;
+}
 
 // return array of buyers from string, or false if invalid
 var str_to_buyers = function(str)
@@ -179,20 +184,14 @@ $(document).ready(function()
 		console.log(total);
 
 		var options = {
-			title: 'Expense Summary',
-			vAxis: { title: '"Name"' }
+			title: 'Expense Summary'
 		};
 
 		// prepare data
-		var data = [['"Name"', 'Debt', 'Owed']];
+		var data = [['"Name"', 'Debt', 'Owed', 'Net']];
 
 		for (var person in total)
-		{
-			if (total[person][0] < total[person][1])
-				data.push([person, 0, total[person][1] - total[person][0]]);
-			else
-				data.push([person, total[person][0] - total[person][1], 0]);
-		}
+			data.push([person, round_cents(total[person][0]), round_cents(total[person][1]), round_cents(total[person][1] - total[person][0])]);
 
 		var chart = new google.visualization.BarChart($('#chart')[0]);
 		chart.draw(google.visualization.arrayToDataTable(data), options);
