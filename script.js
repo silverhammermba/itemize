@@ -1,5 +1,7 @@
 // TODO warn when leaving page
 
+google.load("visualization", "1", {packages:["corechart"]});
+
 // return array of buyers from string, or false if invalid
 var str_to_buyers = function(str)
 {
@@ -153,15 +155,21 @@ $(document).ready(function()
 					{
 						// TODO make sure all of the types are numerical here
 
-						if (owners[i] in total)
-							total[owners[i]] += owed;
-						else
-							total[owners[i]] = owed;
+						if (!(owners[i] in total))
+							total[owners[i]] = [0, 0];
+						if (!(buyers[j] in total))
+							total[buyers[j]] = [0, 0];
 
-						if (buyers[j] in total)
-							total[buyers[j]] -= owed;
+						if (owed > 0)
+						{
+							total[owners[i]][0] += owed;
+							total[buyers[j]][1] += owed;
+						}
 						else
-							total[buyers[j]] = -owed;
+						{
+							total[owners[i]][1] -= owed;
+							total[buyers[j]][0] -= owed;
+						}
 					}
 				}
 			});
@@ -170,9 +178,24 @@ $(document).ready(function()
 		// TODO properly display these
 		console.log(total);
 
+		var options = {
+			title: 'Expense Summary',
+			vAxis: { title: '"Name"' }
+		};
+
+		// prepare data
+		var data = [['"Name"', 'Debt', 'Owed']];
+
 		for (var person in total)
 		{
+			if (total[person][0] < total[person][1])
+				data.push([person, 0, total[person][1] - total[person][0]]);
+			else
+				data.push([person, total[person][0] - total[person][1], 0]);
 		}
+
+		var chart = new google.visualization.BarChart($('#chart')[0]);
+		chart.draw(google.visualization.arrayToDataTable(data), options);
 	});
 
 });
