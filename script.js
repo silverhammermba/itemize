@@ -132,6 +132,49 @@ $(document).ready(function()
 		$(this).before(new_list);
 		buyers.focus();
 	});
+
+	$('#total').click(function()
+	{
+		var total = {};
+
+		$('.prices').each(function() {
+			var buyers = $(this).children('.buyers').text();
+
+			$(this).find('.price').each(function()
+			{
+				var cents = $(this).children('.cents').text();
+				var owners = $(this).children('.for').text();
+
+				var owed = cents / (owners.length * buyers.length);
+
+				for (var i = 0; i < owners.length; i++)
+				{
+					for (var j = 0; j < buyers.length; j++)
+					{
+						// TODO make sure all of the types are numerical here
+
+						if (owners[i] in total)
+							total[owners[i]] += owed;
+						else
+							total[owners[i]] = owed;
+
+						if (buyers[j] in total)
+							total[buyers[j]] -= owed;
+						else
+							total[buyers[j]] = -owed;
+					}
+				}
+			});
+		});
+
+		// TODO properly display these
+		console.log(total);
+
+		for (var person in total)
+		{
+		}
+	});
+
 });
 
 // hooks for elements created after page ready
@@ -156,7 +199,7 @@ $(document).on('blur', '#buyers', function()
 
 	if (buyers)
 	{
-		$(this).after('<span class="buyers"> ' + buyers + '</span>');
+		$(this).after(' <span class="buyers">' + buyers + '</span>');
 		$(this).blur();
 	}
 	else
