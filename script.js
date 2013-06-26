@@ -55,11 +55,12 @@ var check_input = function(str)
 			// normalize
 			var cents = match[3];
 
-			if (match[5] !== undefined)
+			if (match[4] !== undefined)
 			{
 				for (var i = match[5].length; i < 2; i++)
-					match[5] += '0'
-				cents = cents * 100 + parseInt(match[5], 10);
+					match[5] += '0';
+
+				cents += match[5];
 			}
 
 			var display = cents.toString();
@@ -143,6 +144,7 @@ $(document).ready(function()
 
 	$('#total').click(function()
 	{
+		// TODO better error when no prices
 		var total = {};
 
 		$('.prices').each(function() {
